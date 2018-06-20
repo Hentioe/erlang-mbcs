@@ -18,9 +18,8 @@ package: clean
 	@rm -rf $(PKGNAME)-$(VERSION)/
 
 install: all
-	mkdir -p $(prefix)/$(LIBDIR)/$(PKGNAME)-$(VERSION)/ebin $(prefix)/$(LIBDIR)/$(PKGNAME)-$(VERSION)/priv
+	mkdir -p $(prefix)/$(LIBDIR)/$(PKGNAME)-$(VERSION)/ebin
 	for i in ebin/*.beam ebin/*.app; do install $$i $(prefix)/$(LIBDIR)/$(PKGNAME)-$(VERSION)/$$i ; done
-	for i in priv/*; do install $$i $(prefix)/$(LIBDIR)/$(PKGNAME)-$(VERSION)/$$i; done
 test: all
 	prove -v t/*.t
 

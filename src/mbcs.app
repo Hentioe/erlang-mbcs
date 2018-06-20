@@ -3,6 +3,5 @@
   {vsn, "1.0"},
   {modules, [mbcs, mbcs_server, mbcs_sup]},
   {registered, [mbcs, mbcs_server]},
-  {applications, [kernel, stdlib]},
-  {mod, {mbcs_sup,[]}}
+  {applications, [kernel, stdlib]}
  ]}.

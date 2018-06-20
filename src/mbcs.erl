@@ -17,7 +17,7 @@
 %% %CopyrightEnd%
 %%
 -module(mbcs).
--export([start/0, stop/0]).
+-export([start/2, stop/0]).
 -export([encode/2, encode/3, decode/2, decode/3, from_to/3, from_to/4]).
 
 %%---------------------------------------------------------------------------
@@ -29,14 +29,12 @@
 
 %%---------------------------------------------------------------------------
 
-%% @spec start() -> ok | {error, Reason}
+%% @spec start(Args) -> ok | {error, Reason}
 %%
 %% @doc Start mbcs server, Return {ok, Pid}.
 
--spec start() -> ok.
-
-start() ->
-    case application:start(mbcs) of
+start(CodecsList, MbcsDictBin) ->
+    case mbcs_sup:start(normal, [CodecsList, MbcsDictBin]) of
         {ok, _} ->
             ok;
         {error,{already_started,_}} ->

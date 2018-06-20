@@ -7,7 +7,7 @@
 -author('luxiangyu@msn.com').
 -behaviour(gen_server).
 
--export([start/0, stop/0]).
+-export([start/2, stop/0]).
 -export([init/1, handle_call/3, handle_cast/2, terminate/2, code_change/3,
          handle_info/2]).
 
@@ -44,10 +44,7 @@
 
 %%--------------------------------------------------------------------------
 
-start() ->
-    DictPath = code:priv_dir(mbcs),
-    {ok, CodecsList}  = file:consult(DictPath ++ "/codecs.conf"),
-    {ok, MbcsDictBin} = file:read_file(DictPath ++ "/mbcs.dict"),
+start(CodecsList, MbcsDictBin) ->
     State = #mbcs_server{codecs = dict:from_list(CodecsList),
                        mbcs_codecs = binary_to_term(MbcsDictBin)
                     },
